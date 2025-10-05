@@ -30,6 +30,12 @@ var finished = false
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)	
+	var silver = get_parent().get_meta("Silver")
+	var gold = get_parent().get_meta("Gold")
+	var dev = get_parent().get_meta("Dev")
+	var levelIdx: int = get_parent().get_meta("level") - 1
+	var pb = Global.times[levelIdx]
+	find_child("VBoxContainer").setTargetTimes(pb, dev, gold, silver)
 
 func _physics_process(delta: float) -> void:
 	currTime = currTime + delta
@@ -173,6 +179,8 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 					Global.medal[levelIdx] = 2
 				if(points >= get_parent().get_meta("Gold")):
 					Global.medal[levelIdx] = 3
+				if(points >= get_parent().get_meta("Dev")):
+					Global.medal[levelIdx] = 4
 				Global.saveData()
 				$Camera3D/Control.celebrate("New PB!")
 			else:

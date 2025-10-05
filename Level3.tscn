@@ -24,6 +24,7 @@ script = ExtResource("1_u5lf4")
 metadata/level = 3
 metadata/Gold = 2500
 metadata/Silver = 1500
+metadata/Dev = 2838
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_7swbh")]
 

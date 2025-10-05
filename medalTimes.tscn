@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce6idcp6kph08"]
+
+[ext_resource type="Script" uid="uid://bpjki0civpgfc" path="res://medal_times.gd" id="1_7cb3r"]
+
+[sub_resource type="Theme" id="Theme_jryrn"]
+default_font_size = 42
+
+[node name="VBoxContainer" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -764.0
+offset_bottom = 309.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7cb3r")
+
+[node name="pb" type="RichTextLabel" parent="."]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme = SubResource("Theme_jryrn")
+theme_override_colors/default_color = Color(0.882353, 0.882353, 0.882353, 0.882353)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[right]PB - 0"
+tab_size = 1
+
+[node name="dev" type="RichTextLabel" parent="."]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme = SubResource("Theme_jryrn")
+theme_override_colors/default_color = Color(0.807843, 0.0784314, 0.839216, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[right]Dev - 0"
+tab_size = 1
+
+[node name="gold" type="RichTextLabel" parent="."]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme = SubResource("Theme_jryrn")
+theme_override_colors/default_color = Color(0.913725, 0.682353, 0.188235, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[right]Gold - 0"
+
+[node name="silver" type="RichTextLabel" parent="."]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme = SubResource("Theme_jryrn")
+theme_override_colors/default_color = Color(0.827451, 0.835294, 0.835294, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[right]Silver - 0"

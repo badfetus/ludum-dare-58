@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dta32dfhx2qqm"]
+[gd_scene load_steps=8 format=3 uid="uid://dta32dfhx2qqm"]
 
 [ext_resource type="Script" uid="uid://bk74gvl788jcr" path="res://player.gd" id="1_hqtel"]
 [ext_resource type="Script" uid="uid://b1s8dpeqo5ktp" path="res://camera.gd" id="2_sweqy"]
 [ext_resource type="Script" uid="uid://bcu4sarpvgcj" path="res://control.gd" id="3_2hs0m"]
 [ext_resource type="AudioStream" uid="uid://dp3dfllqqmayk" path="res://sounds/Jump.wav" id="4_1jxqw"]
+[ext_resource type="PackedScene" uid="uid://ce6idcp6kph08" path="res://medalTimes.tscn" id="4_sweqy"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fj7yv"]
 
@@ -208,6 +209,23 @@ text = "
 C - Show/hide controls
 "
 fit_content = true
+
+[node name="Control" type="Control" parent="Camera3D/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" parent="Camera3D/Control/Control" instance=ExtResource("4_sweqy")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 1
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -10000)

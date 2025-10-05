@@ -23,11 +23,11 @@ uv1_scale = Vector3(100, 250, 100)
 [sub_resource type="BoxShape3D" id="BoxShape3D_s3sxq"]
 size = Vector3(10, 1, 150)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bjei"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80vsr"]
 albedo_texture = ExtResource("8_5py54")
 
 [sub_resource type="BoxMesh" id="BoxMesh_5g1s2"]
-material = SubResource("StandardMaterial3D_1bjei")
+material = SubResource("StandardMaterial3D_80vsr")
 size = Vector3(10, 1, 150)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aiv1b"]
@@ -45,6 +45,7 @@ script = ExtResource("1_5py54")
 metadata/level = 1
 metadata/Gold = 3000
 metadata/Silver = 1800
+metadata/Dev = 3452
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_1bjei")]
 
