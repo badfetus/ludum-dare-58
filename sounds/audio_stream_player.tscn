@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://cylr6n5amvh3t"]
 
-[ext_resource type="AudioStream" uid="uid://diiu0fndtfnhp" path="res://sounds/DepthSong.wav" id="1_g84o6"]
+[ext_resource type="AudioStream" uid="uid://4bcow3iwo50q" path="res://sounds/soundtrack.wav" id="1_vftce"]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
-stream = ExtResource("1_g84o6")
+stream = ExtResource("1_vftce")
 autoplay = true

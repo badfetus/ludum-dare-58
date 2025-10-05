@@ -72,6 +72,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+			$ShootPlayer.play()
 			points -= 50
 			$Camera3D/RayCast3D.force_raycast_update()
 			if(!$Camera3D/RayCast3D.is_colliding()):
@@ -79,6 +80,7 @@ func _input(event: InputEvent) -> void:
 			var collider = $Camera3D/RayCast3D.get_collider()
 			if collider is Pickup:
 				collider.collect()
+				$CollectPlayer.play()
 		elif event.button_index == MOUSE_BUTTON_RIGHT and item != 0:
 			useItem()
 
@@ -94,11 +96,13 @@ func useItem():
 			impulse.x = sin(horizontalRotation) * 30 * 1 * abs(cos(getNormalisedAngle(camRot.x)))
 			impulse.z = cos(horizontalRotation) * 30 * 1 * abs(cos(getNormalisedAngle(camRot.x)))
 			apply_central_impulse(impulse)
+			$JumpPlayer.play()
 		2:
 			var force = 20
 			if(linear_velocity.y < 0):
 				force += -linear_velocity.y * mass
 			apply_central_impulse(Vector3(0, force, 0))
+			$JumpPlayer.play()
 	item = 0
 
 func walk():
@@ -139,6 +143,7 @@ var initialJumpMult = 25
 func jump(delta):	
 	if on_floor and Input.is_action_pressed("Jump") and (currTime - lastJump > leeway * 1.2):
 		apply_central_impulse(Vector3(0, jumpForce * delta * initialJumpMult, 0))
+		$JumpPlayer.play()
 		stoppedJump = false
 		lastJump = currTime
 	elif !stoppedJump:
@@ -165,6 +170,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		var object = state.get_contact_collider_object(i)
 		if object is Pickup:
 			i+=1
+			$CollectPlayer.play()
 			object.collect()
 			continue
 		if object is Goal:
@@ -188,6 +194,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		if object is IceFloor:
 			lastIce = currTime
 		if object is JumpFloor:
+			$JumpPlayer.play()
 			apply_central_impulse(Vector3(0, 40, 0))
 			lastJump = currTime
 			

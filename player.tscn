@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dta32dfhx2qqm"]
+[gd_scene load_steps=10 format=3 uid="uid://dta32dfhx2qqm"]
 
 [ext_resource type="Script" uid="uid://bk74gvl788jcr" path="res://player.gd" id="1_hqtel"]
 [ext_resource type="Script" uid="uid://b1s8dpeqo5ktp" path="res://camera.gd" id="2_sweqy"]
 [ext_resource type="Script" uid="uid://bcu4sarpvgcj" path="res://control.gd" id="3_2hs0m"]
-[ext_resource type="AudioStream" uid="uid://dp3dfllqqmayk" path="res://sounds/Jump.wav" id="4_1jxqw"]
+[ext_resource type="AudioStream" uid="uid://d4ly40eyhljs0" path="res://sounds/Jump.wav" id="4_1jxqw"]
 [ext_resource type="PackedScene" uid="uid://ce6idcp6kph08" path="res://medalTimes.tscn" id="4_sweqy"]
+[ext_resource type="AudioStream" uid="uid://881gjh60p2ga" path="res://sounds/shoot.wav" id="6_1jxqw"]
+[ext_resource type="AudioStream" uid="uid://c7h7hln3wdvn3" path="res://sounds/collect.wav" id="7_dw050"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fj7yv"]
 
@@ -234,4 +236,11 @@ debug_shape_thickness = 1
 
 [node name="JumpPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_1jxqw")
+
+[node name="ShootPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_1jxqw")
+volume_db = 5.0
+
+[node name="CollectPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_dw050")
 volume_db = 10.0

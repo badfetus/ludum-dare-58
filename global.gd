@@ -4,10 +4,10 @@ var times = [-10000, -10000, -10000, -10000]
 var medal = [0, 0, 0, 0]
 
 var sens : float = 200.0
-var musicVol: float = 0.0
+var musicVol: float = -10.0
 
 var maxVol = 0.0
-var minVol = -10
+var minVol = -20
 var volStep = 0.5
 
 var minSensitivity = 20
