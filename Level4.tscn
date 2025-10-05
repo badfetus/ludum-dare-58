@@ -1,0 +1,193 @@
+[gd_scene load_steps=13 format=3 uid="uid://dhbb2duyqils5"]
+
+[ext_resource type="Script" uid="uid://bkmlnbcalpm3p" path="res://world.gd" id="1_evb8c"]
+[ext_resource type="PackedScene" uid="uid://cktynfl3gck4y" path="res://world_environment.tscn" id="2_yqqjl"]
+[ext_resource type="PackedScene" uid="uid://dta32dfhx2qqm" path="res://player.tscn" id="3_gkwbp"]
+[ext_resource type="PackedScene" uid="uid://cdw3lb6k3vmwj" path="res://directional_light_3d.tscn" id="4_nj7ao"]
+[ext_resource type="PackedScene" uid="uid://dmq5cpdrmiq7" path="res://pickups/Pickup.tscn" id="5_1ug64"]
+[ext_resource type="PackedScene" uid="uid://corqvqem2lxrn" path="res://pickups/Goal.tscn" id="6_yg50l"]
+[ext_resource type="Script" uid="uid://dur8nsggpgrqi" path="res://ice_floor.gd" id="7_cbmc8"]
+[ext_resource type="Texture2D" uid="uid://8olj0qcq572i" path="res://FloorIce.png" id="8_872hp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s3sxq"]
+size = Vector3(100, 1, 300)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80vsr"]
+albedo_texture = ExtResource("8_872hp")
+
+[sub_resource type="BoxMesh" id="BoxMesh_5g1s2"]
+material = SubResource("StandardMaterial3D_80vsr")
+size = Vector3(100, 1, 300)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aiv1b"]
+albedo_texture = ExtResource("8_872hp")
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_evb8c")
+metadata/level = 4
+metadata/Gold = 10000
+metadata/Silver = 5000
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("2_yqqjl")]
+
+[node name="Player" parent="." instance=ExtResource("3_gkwbp")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
+gravity_scale = 1.5
+
+[node name="DirectionalLight3D" parent="." instance=ExtResource("4_nj7ao")]
+
+[node name="Pickups" type="Node3D" parent="."]
+
+[node name="Pickup" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 9.264307)
+
+[node name="Pickup2" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 4, 45)
+
+[node name="Pickup3" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 4, 65)
+
+[node name="Pickup4" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 4, 90)
+
+[node name="Pickup5" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 4, 135)
+
+[node name="Pickup6" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 4, 155)
+
+[node name="Pickup7" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 4, 110)
+
+[node name="Goal" parent="Pickups" instance=ExtResource("6_yg50l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 225)
+
+[node name="Pickup8" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.48046, 2, 9.264307)
+
+[node name="Pickup9" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.876137, 2, 9.264307)
+
+[node name="Pickup10" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.901955, 2, 31.379057)
+
+[node name="Pickup11" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.694557, 2, 33.950676)
+
+[node name="Pickup12" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 66.01084)
+
+[node name="Pickup13" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.692535, 2, 23.25965)
+
+[node name="Pickup14" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.80332, 2, 19.793146)
+
+[node name="Pickup15" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.980186, 2, 64.18248)
+
+[node name="Pickup16" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.769077, 2, 39.38308)
+
+[node name="Pickup17" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.904648, 28.293203)
+
+[node name="Pickup18" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.572163, 19.904648, 28.293203)
+
+[node name="Pickup19" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.838272, 19.904648, 140.20642)
+
+[node name="Pickup20" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.982117, 19.904648, 184.4209)
+
+[node name="Pickup21" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.82342, 4, 116.71324)
+
+[node name="Pickup22" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.82342, 4, 161.71324)
+
+[node name="Pickup23" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8234215, 4, 181.71324)
+
+[node name="Pickup24" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8234215, 4, 136.71324)
+
+[node name="Pickup25" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.659603, 13.061062, 140.18129)
+
+[node name="Pickup26" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.659603, 13.061062, 185.18129)
+
+[node name="Pickup27" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.340397, 13.061062, 205.18129)
+
+[node name="Pickup28" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.340397, 13.061062, 160.18129)
+
+[node name="Pickup29" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.10123, 357.27914)
+
+[node name="Pickup30" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.751114, 27.10123, 357.27914)
+
+[node name="Pickup31" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.282883, 27.10123, 357.27914)
+
+[node name="Pickup32" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.420715, 27.10123, 357.27914)
+
+[node name="Pickup33" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.669601, 27.10123, 357.27914)
+
+[node name="Pickup34" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.137833, 27.10123, 357.27914)
+
+[node name="Pickup35" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.921738, 357.27914)
+
+[node name="Pickup36" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.751114, 40.921738, 357.27914)
+
+[node name="Pickup37" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.282883, 40.921738, 357.27914)
+
+[node name="Pickup38" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.420715, 40.921738, 357.27914)
+
+[node name="Pickup39" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.669601, 40.921738, 357.27914)
+
+[node name="Pickup40" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.137833, 40.921738, 357.27914)
+
+[node name="Pickup41" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 51.680626, 357.27914)
+
+[node name="Pickup42" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.751114, 51.680626, 357.27914)
+
+[node name="Pickup43" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.282883, 51.680626, 357.27914)
+
+[node name="Pickup44" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.420715, 51.680626, 357.27914)
+
+[node name="Pickup45" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.669601, 51.680626, 357.27914)
+
+[node name="Pickup46" parent="Pickups" instance=ExtResource("5_1ug64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.137833, 51.680626, 357.27914)
+
+[node name="Platforms" type="Node3D" parent="."]
+
+[node name="IcePath" type="StaticBody3D" parent="Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 140)
+script = ExtResource("7_cbmc8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/IcePath"]
+shape = SubResource("BoxShape3D_s3sxq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/IcePath"]
+mesh = SubResource("BoxMesh_5g1s2")
+surface_material_override/0 = SubResource("StandardMaterial3D_aiv1b")

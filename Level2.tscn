@@ -1,0 +1,231 @@
+[gd_scene load_steps=30 format=3 uid="uid://dwmiavjtuc0gk"]
+
+[ext_resource type="Script" uid="uid://bkmlnbcalpm3p" path="res://world.gd" id="1_6x3wt"]
+[ext_resource type="PackedScene" uid="uid://cktynfl3gck4y" path="res://world_environment.tscn" id="2_3453u"]
+[ext_resource type="PackedScene" uid="uid://dta32dfhx2qqm" path="res://player.tscn" id="3_46pvi"]
+[ext_resource type="PackedScene" uid="uid://cdw3lb6k3vmwj" path="res://directional_light_3d.tscn" id="4_fvkd4"]
+[ext_resource type="PackedScene" uid="uid://dmq5cpdrmiq7" path="res://pickups/Pickup.tscn" id="5_pj4lr"]
+[ext_resource type="PackedScene" uid="uid://corqvqem2lxrn" path="res://pickups/Goal.tscn" id="6_00xh1"]
+[ext_resource type="PackedScene" uid="uid://c4tf2cyygg4l6" path="res://pickups/JumpPickup.tscn" id="6_46pvi"]
+[ext_resource type="Texture2D" uid="uid://crau5r0jb4s84" path="res://FloorWhite.png" id="7_8tfmj"]
+[ext_resource type="Script" uid="uid://cghi4xpwhsbc5" path="res://jump_floor.gd" id="7_nc7oo"]
+[ext_resource type="Texture2D" uid="uid://de76nmjkhephc" path="res://FloorYellow.png" id="8_6x3wt"]
+[ext_resource type="Script" uid="uid://dur8nsggpgrqi" path="res://ice_floor.gd" id="8_jw1dd"]
+[ext_resource type="PackedScene" uid="uid://bvkvvo3giwnxu" path="res://pickups/DashPickup.tscn" id="8_pj4lr"]
+[ext_resource type="Texture2D" uid="uid://8olj0qcq572i" path="res://FloorIce.png" id="9_0xt02"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_psxy2"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wwdpc"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6faey"]
+albedo_texture = ExtResource("7_8tfmj")
+uv1_scale = Vector3(30, 20, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3453u"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46pvi"]
+albedo_texture = ExtResource("8_6x3wt")
+uv1_offset = Vector3(0, 0.25, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3453u"]
+size = Vector3(10, 1, 150)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bjei"]
+albedo_texture = ExtResource("9_0xt02")
+
+[sub_resource type="BoxMesh" id="BoxMesh_46pvi"]
+material = SubResource("StandardMaterial3D_1bjei")
+size = Vector3(10, 1, 150)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fvkd4"]
+albedo_texture = ExtResource("7_8tfmj")
+uv1_scale = Vector3(15, 120, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pj4lr"]
+size = Vector3(10, 1, 150)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00xh1"]
+albedo_texture = ExtResource("9_0xt02")
+
+[sub_resource type="BoxMesh" id="BoxMesh_8tfmj"]
+material = SubResource("StandardMaterial3D_00xh1")
+size = Vector3(10, 1, 150)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jw1dd"]
+albedo_texture = ExtResource("9_0xt02")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_00xh1"]
+size = Vector3(10, 10, 120)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jw1dd"]
+size = Vector3(10, 10, 120)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xt02"]
+albedo_texture = ExtResource("9_0xt02")
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_6x3wt")
+metadata/level = 2
+metadata/Gold = 3000
+metadata/Silver = 2000
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("2_3453u")]
+
+[node name="Player" parent="." instance=ExtResource("3_46pvi")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
+gravity_scale = 1.5
+
+[node name="DirectionalLight3D" parent="." instance=ExtResource("4_fvkd4")]
+
+[node name="Pickups" type="Node3D" parent="."]
+
+[node name="Goal" parent="Pickups" instance=ExtResource("6_00xh1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.259378, 56.233894, 225)
+
+[node name="JumpPickup" parent="Pickups" instance=ExtResource("6_46pvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 15)
+
+[node name="Pickup3" parent="Pickups" instance=ExtResource("5_pj4lr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 45)
+
+[node name="Pickup5" parent="Pickups" instance=ExtResource("5_pj4lr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 105)
+
+[node name="JumpPickup2" parent="Pickups" instance=ExtResource("6_46pvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 75)
+
+[node name="Pickup6" parent="Pickups" instance=ExtResource("5_pj4lr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 120)
+
+[node name="Pickup7" parent="Pickups" instance=ExtResource("5_pj4lr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 135)
+
+[node name="JumpPickup3" parent="Pickups" instance=ExtResource("6_46pvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 198)
+
+[node name="JumpPickup4" parent="Pickups" instance=ExtResource("6_46pvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 22, 205)
+
+[node name="JumpPickup5" parent="Pickups" instance=ExtResource("6_46pvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 26, 212)
+
+[node name="JumpPickup6" parent="Pickups" instance=ExtResource("6_46pvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 219)
+
+[node name="JumpPickup7" parent="Pickups" instance=ExtResource("6_46pvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 34, 222.5)
+
+[node name="JumpPickup8" parent="Pickups" instance=ExtResource("6_46pvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 38, 222.5)
+
+[node name="JumpPickup9" parent="Pickups" instance=ExtResource("6_46pvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 42, 222.5)
+
+[node name="DashPickup" parent="Pickups" instance=ExtResource("8_pj4lr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 20, 120)
+
+[node name="DashPickup2" parent="Pickups" instance=ExtResource("8_pj4lr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 20, 60)
+
+[node name="Pickup4" parent="Pickups" instance=ExtResource("5_pj4lr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43, 18, 45)
+
+[node name="Pickup8" parent="Pickups" instance=ExtResource("5_pj4lr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43, 18, 75)
+
+[node name="Pickup9" parent="Pickups" instance=ExtResource("5_pj4lr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43, 18, 105)
+
+[node name="Pickup10" parent="Pickups" instance=ExtResource("5_pj4lr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43, 18, 60)
+
+[node name="Pickup11" parent="Pickups" instance=ExtResource("5_pj4lr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43, 18, 90)
+
+[node name="Platforms" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Floor"]
+shape = SubResource("BoxShape3D_psxy2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Floor"]
+mesh = SubResource("BoxMesh_wwdpc")
+surface_material_override/0 = SubResource("StandardMaterial3D_6faey")
+
+[node name="Floor2" type="StaticBody3D" parent="Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 163)
+script = ExtResource("7_nc7oo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Floor2"]
+shape = SubResource("BoxShape3D_psxy2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Floor2"]
+mesh = SubResource("BoxMesh_3453u")
+surface_material_override/0 = SubResource("StandardMaterial3D_46pvi")
+
+[node name="Floor3" type="StaticBody3D" parent="Platforms"]
+transform = Transform3D(0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0, 1, -8.45, 2.5, 3)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Floor3"]
+shape = SubResource("BoxShape3D_psxy2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Floor3"]
+mesh = SubResource("BoxMesh_wwdpc")
+surface_material_override/0 = SubResource("StandardMaterial3D_6faey")
+
+[node name="Floor4" type="StaticBody3D" parent="Platforms"]
+transform = Transform3D(0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0, 1, -17.1, 7.5, 3)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Floor4"]
+shape = SubResource("BoxShape3D_psxy2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Floor4"]
+mesh = SubResource("BoxMesh_wwdpc")
+surface_material_override/0 = SubResource("StandardMaterial3D_6faey")
+
+[node name="Floor5" type="StaticBody3D" parent="Platforms"]
+transform = Transform3D(0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0, 1, -25.75, 12.5, 3)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Floor5"]
+shape = SubResource("BoxShape3D_psxy2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Floor5"]
+mesh = SubResource("BoxMesh_wwdpc")
+surface_material_override/0 = SubResource("StandardMaterial3D_6faey")
+
+[node name="NormalPath" type="StaticBody3D" parent="Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 83)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/NormalPath"]
+shape = SubResource("BoxShape3D_3453u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/NormalPath"]
+mesh = SubResource("BoxMesh_46pvi")
+surface_material_override/0 = SubResource("StandardMaterial3D_fvkd4")
+
+[node name="IcePath" type="StaticBody3D" parent="Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 15, 73)
+script = ExtResource("8_jw1dd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/IcePath"]
+shape = SubResource("BoxShape3D_pj4lr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/IcePath"]
+mesh = SubResource("BoxMesh_8tfmj")
+surface_material_override/0 = SubResource("StandardMaterial3D_jw1dd")
+
+[node name="Wall" type="StaticBody3D" parent="Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 22, 83)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platforms/Wall"]
+shape = SubResource("BoxShape3D_00xh1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platforms/Wall"]
+mesh = SubResource("BoxMesh_jw1dd")
+surface_material_override/0 = SubResource("StandardMaterial3D_0xt02")

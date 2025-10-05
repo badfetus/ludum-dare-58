@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name Pickup
 
+@onready var player: Player = get_parent().get_parent().get_node("Player")
+
 var startY
 var currTime = 0
 var color = "[color=white]"
@@ -17,4 +19,4 @@ func collect():
 	queue_free()
 	
 func applyEffect():
-	print("hi")
+	player.points += 500

@@ -1,52 +1,84 @@
 extends RigidBody3D
 
+class_name Player
+
 @onready
 var camera: Camera3D = $Camera3D
 
 var mouseDelta = Vector2()
 var holdDuration = 0
 var on_floor: bool = false # now global!
-var currTime = 0
+var currTime = 0.0
 var lastTimeOnFloor = -100
 var lastJump = -100
+var lastShot = -100
 
-var points = 1000
+var lastIce = -100
+
+var shotCD = 0.5
+var points: int = 1000
 
 var item = 0
-var itemTexts = ["No \nitem", "Dash", "Jump"]
+var itemTexts = ["No item", "Dash", "Jump"]
 var colors = [Color.WHITE, Color.RED, Color.YELLOW]
 
 var reached = [false, false, false, false]
 
+var stoppedJump = true
+
+var finished = false
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)	
-	connect("body_entered", _on_body_entered)
 
 func _physics_process(delta: float) -> void:
-	#item += 1
-	item %= 3
+	currTime = currTime + delta
+
+	updateItemBox()
+	handlePoints()
+	controlPlayer(delta)
+	applyDrag()
+
+func updateItemBox():
 	var itemBox = find_child("item")
 	itemBox.color = colors[item]
 	var label: Label = itemBox.get_child(0)
 	label.text = itemTexts[item]
+
+func handlePoints():
+	if !finished:
+		points -= 1
 	
-	handlePoints(delta)
-	currTime = currTime + delta
-	controlPlayer()
-	applyDrag()
-	
-	
-func handlePoints(delta):
-	points -= delta * 100
-	
-func controlPlayer():
+func controlPlayer(delta):
+	handleUI()
 	if position.y < -10:
 		get_parent().restart()
 	walk()
-	jump()
-	
-func handleCheats():
-	if Input.is_action_just_pressed("Cheat"): 
+	jump(delta)
+
+func handleUI():
+	if Input.is_action_just_pressed("Controls"):
+		var controlUI = find_child("Controls")
+		controlUI.visible = !controlUI.visible
+
+func _input(event: InputEvent) -> void:
+	if finished:
+		return
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+			points -= 50
+			$Camera3D/RayCast3D.force_raycast_update()
+			if(!$Camera3D/RayCast3D.is_colliding()):
+				return
+			var collider = $Camera3D/RayCast3D.get_collider()
+			if collider is Pickup:
+				collider.collect()
+		elif event.button_index == MOUSE_BUTTON_RIGHT and item != 0:
+			useItem()
+
+func useItem():
+	match item:
+		1:
 			var camRot = camera.rotation
 			var horizontalRotation = camRot.y
 	
@@ -56,12 +88,12 @@ func handleCheats():
 			impulse.x = sin(horizontalRotation) * 30 * 1 * abs(cos(getNormalisedAngle(camRot.x)))
 			impulse.z = cos(horizontalRotation) * 30 * 1 * abs(cos(getNormalisedAngle(camRot.x)))
 			apply_central_impulse(impulse)
-	if Input.is_action_just_pressed("Cheat2"): 
-		apply_central_impulse(linear_velocity * -1)
-
-
-func _input(_event: InputEvent) -> void:
-	pass
+		2:
+			var force = 20
+			if(linear_velocity.y < 0):
+				force += -linear_velocity.y * mass
+			apply_central_impulse(Vector3(0, force, 0))
+	item = 0
 
 func walk():
 	var camRot = camera.rotation
@@ -91,33 +123,35 @@ func walk():
 func applyDrag():
 	var dragCoeff = linear_velocity.abs() * linear_velocity.abs() * 0.001
 	var drag = linear_velocity.normalized() * dragCoeff * -1
-	#drag.y = 0
+	if(currTime - lastIce < 0.25):
+		drag *= 0.25
 	apply_central_impulse(drag)
 
-
-func jump():	
+var maxJump = 0.2
+var jumpForce = 40
+var initialJumpMult = 25
+func jump(delta):	
 	if on_floor and Input.is_action_pressed("Jump") and (currTime - lastJump > leeway * 1.2):
-		apply_central_impulse(Vector3(0, 20, 0))
+		apply_central_impulse(Vector3(0, jumpForce * delta * initialJumpMult, 0))
+		stoppedJump = false
 		lastJump = currTime
-
+	elif !stoppedJump:
+		apply_central_impulse(Vector3(0, jumpForce * delta, 0))
+		if(currTime - lastJump >= maxJump):
+			stoppedJump = true
+		if(!Input.is_action_pressed("Jump")):
+			stoppedJump = true
 func getNormalisedAngle(angle: float) -> float:
 	var normAngle = fmod(angle, (PI * 2))
-	if(normAngle > PI):
-		normAngle -= 2 * PI
+	#if(normAngle > PI):
+		#normAngle -= 2 * PI
 	return normAngle
-
-func _on_body_entered(body):
-	if(body.name.begins_with("CP")):
-		var index = int(body.name.substr(2)) - 1
-		#Global.updateTime(index, currTime)
-		if(!reached[index]):
-			reached[index] = true
-			$Camera3D/Control.celebrate(index)
-		
-		
+				
 var leeway = 0.25
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	if finished:
+		return
 	on_floor = false
 	
 	var i := 0
@@ -127,7 +161,28 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 			i+=1
 			object.collect()
 			continue
-		
+		if object is Goal:
+			finished = true
+			var levelIdx: int = get_parent().get_meta("level") - 1
+			var oldPb = Global.times[levelIdx]
+			
+			if(points > oldPb):
+				Global.times[levelIdx] = points
+				Global.medal[levelIdx] = 1
+				if(points >= get_parent().get_meta("Silver")): #offset by 0.001 so that if the visible decimals equal you get it
+					Global.medal[levelIdx] = 2
+				if(points >= get_parent().get_meta("Gold")):
+					Global.medal[levelIdx] = 3
+				Global.saveData()
+				$Camera3D/Control.celebrate("New PB!")
+			else:
+				$Camera3D/Control.celebrate("Win!")
+		if object is IceFloor:
+			lastIce = currTime
+		if object is JumpFloor:
+			apply_central_impulse(Vector3(0, 40, 0))
+			lastJump = currTime
+			
 		var normal := state.get_contact_local_normal(i)
 		var this_contact_on_floor = normal.dot(Vector3.UP) > 0.5
 
@@ -138,3 +193,6 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		lastTimeOnFloor = currTime
 	elif (currTime - lastTimeOnFloor < leeway):
 		on_floor = true
+		
+	if(on_floor and currTime - lastTimeOnFloor > leeway):
+		stoppedJump = true

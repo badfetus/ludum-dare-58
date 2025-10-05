@@ -1,9 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://fg4h4v7677ls"]
+[gd_scene load_steps=31 format=3 uid="uid://fg4h4v7677ls"]
 
 [ext_resource type="Texture2D" uid="uid://udsiard381k4" path="res://FloorGreen.png" id="1_128mb"]
 [ext_resource type="Texture2D" uid="uid://de76nmjkhephc" path="res://FloorYellow.png" id="2_ixf5k"]
 [ext_resource type="Texture2D" uid="uid://8olj0qcq572i" path="res://FloorIce.png" id="3_j1qvj"]
 [ext_resource type="Texture2D" uid="uid://cipg58ew71e1f" path="res://FloorRed.png" id="4_gkpax"]
+[ext_resource type="Script" uid="uid://dur8nsggpgrqi" path="res://ice_floor.gd" id="5_ixf5k"]
+[ext_resource type="Script" uid="uid://cghi4xpwhsbc5" path="res://jump_floor.gd" id="6_j1qvj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_036b0"]
 size = Vector3(10, 1, 10)
@@ -41,12 +43,6 @@ size = Vector3(10, 1, 10)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wse8f"]
 albedo_texture = ExtResource("3_j1qvj")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_pkg7o"]
-size = Vector3(50, 1, 10)
-
-[sub_resource type="BoxMesh" id="BoxMesh_gbfbk"]
-size = Vector3(50, 1, 10)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_gbfbk"]
 size = Vector3(200, 1, 200)
 
@@ -63,6 +59,12 @@ size = Vector3(5, 1, 5)
 albedo_texture = ExtResource("4_gkpax")
 uv1_scale = Vector3(8, 6, 8)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_pkg7o"]
+size = Vector3(150, 1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gbfbk"]
+size = Vector3(150, 1, 10)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_wse8f"]
 size = Vector3(30, 1, 30)
 
@@ -74,6 +76,12 @@ size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2o6r5"]
 size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j1qvj"]
+size = Vector3(150, 1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1qvj"]
+albedo_texture = ExtResource("1_128mb")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ic0uy"]
 albedo_texture = ExtResource("3_j1qvj")
@@ -205,17 +213,6 @@ shape = SubResource("BoxShape3D_036b0")
 mesh = SubResource("BoxMesh_dwbse")
 surface_material_override/0 = SubResource("StandardMaterial3D_gbfbk")
 
-[node name="IceFloor3" type="StaticBody3D" parent="Yellow Zone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.8178, 25, 0)
-physics_material_override = SubResource("PhysicsMaterial_gbfbk")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Yellow Zone/IceFloor3"]
-shape = SubResource("BoxShape3D_036b0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Yellow Zone/IceFloor3"]
-mesh = SubResource("BoxMesh_ioo17")
-surface_material_override/0 = SubResource("StandardMaterial3D_wse8f")
-
 [node name="YellowFloor5" type="StaticBody3D" parent="Yellow Zone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.6269, 25, 0)
 
@@ -225,17 +222,6 @@ shape = SubResource("BoxShape3D_036b0")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Yellow Zone/YellowFloor5"]
 mesh = SubResource("BoxMesh_dwbse")
 surface_material_override/0 = SubResource("StandardMaterial3D_gbfbk")
-
-[node name="IceFloor2" type="StaticBody3D" parent="Yellow Zone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 108.71, 25, 0)
-physics_material_override = SubResource("PhysicsMaterial_gbfbk")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Yellow Zone/IceFloor2"]
-shape = SubResource("BoxShape3D_pkg7o")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Yellow Zone/IceFloor2"]
-mesh = SubResource("BoxMesh_gbfbk")
-surface_material_override/0 = SubResource("StandardMaterial3D_wse8f")
 
 [node name="YellowFloor6" type="StaticBody3D" parent="Yellow Zone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 30, -15)
@@ -392,98 +378,12 @@ mesh = SubResource("BoxMesh_2o6r5")
 surface_material_override/0 = SubResource("StandardMaterial3D_k3n1d")
 
 [node name="Ice Zone" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 93.67, 190, 28.808)
-
-[node name="IceFloor" type="StaticBody3D" parent="Ice Zone"]
-physics_material_override = SubResource("PhysicsMaterial_gbfbk")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ice Zone/IceFloor"]
-shape = SubResource("BoxShape3D_036b0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ice Zone/IceFloor"]
-mesh = SubResource("BoxMesh_ioo17")
-surface_material_override/0 = SubResource("StandardMaterial3D_wse8f")
-
-[node name="IceFloor2" type="StaticBody3D" parent="Ice Zone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.763, 10, 0)
-physics_material_override = SubResource("PhysicsMaterial_gbfbk")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ice Zone/IceFloor2"]
-shape = SubResource("BoxShape3D_036b0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ice Zone/IceFloor2"]
-mesh = SubResource("BoxMesh_ioo17")
-surface_material_override/0 = SubResource("StandardMaterial3D_wse8f")
-
-[node name="IceFloor3" type="StaticBody3D" parent="Ice Zone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.763, 10, 19.0446)
-physics_material_override = SubResource("PhysicsMaterial_gbfbk")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ice Zone/IceFloor3"]
-shape = SubResource("BoxShape3D_036b0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ice Zone/IceFloor3"]
-mesh = SubResource("BoxMesh_ioo17")
-surface_material_override/0 = SubResource("StandardMaterial3D_wse8f")
-
-[node name="IceFloor4" type="StaticBody3D" parent="Ice Zone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.763, 10, 37.4618)
-physics_material_override = SubResource("PhysicsMaterial_gbfbk")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ice Zone/IceFloor4"]
-shape = SubResource("BoxShape3D_036b0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ice Zone/IceFloor4"]
-mesh = SubResource("BoxMesh_ioo17")
-surface_material_override/0 = SubResource("StandardMaterial3D_wse8f")
-
-[node name="IceFloor5" type="StaticBody3D" parent="Ice Zone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.763, 10, 55.7058)
-physics_material_override = SubResource("PhysicsMaterial_gbfbk")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ice Zone/IceFloor5"]
-shape = SubResource("BoxShape3D_036b0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ice Zone/IceFloor5"]
-mesh = SubResource("BoxMesh_ioo17")
-surface_material_override/0 = SubResource("StandardMaterial3D_wse8f")
-
-[node name="IceFloor6" type="StaticBody3D" parent="Ice Zone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.742, 20, 55.706)
-physics_material_override = SubResource("PhysicsMaterial_gbfbk")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ice Zone/IceFloor6"]
-shape = SubResource("BoxShape3D_036b0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ice Zone/IceFloor6"]
-mesh = SubResource("BoxMesh_ioo17")
-surface_material_override/0 = SubResource("StandardMaterial3D_wse8f")
-
-[node name="IceFloor7" type="StaticBody3D" parent="Ice Zone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.397, 25, 56.8828)
-physics_material_override = SubResource("PhysicsMaterial_gbfbk")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ice Zone/IceFloor7"]
-shape = SubResource("BoxShape3D_pkg7o")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ice Zone/IceFloor7"]
-mesh = SubResource("BoxMesh_gbfbk")
-surface_material_override/0 = SubResource("StandardMaterial3D_wse8f")
-
-[node name="IceFloor8" type="StaticBody3D" parent="Ice Zone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.454, 35, 55.706)
-physics_material_override = SubResource("PhysicsMaterial_gbfbk")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ice Zone/IceFloor8"]
-shape = SubResource("BoxShape3D_036b0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ice Zone/IceFloor8"]
-mesh = SubResource("BoxMesh_ioo17")
-surface_material_override/0 = SubResource("StandardMaterial3D_wse8f")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 93.67, -3, 28.808)
 
 [node name="IceFloor9" type="StaticBody3D" parent="Ice Zone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5975, 45, 56.883)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.23184, 5, 1.3762417)
 physics_material_override = SubResource("PhysicsMaterial_gbfbk")
+script = ExtResource("5_ixf5k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ice Zone/IceFloor9"]
 shape = SubResource("BoxShape3D_pkg7o")
@@ -491,6 +391,18 @@ shape = SubResource("BoxShape3D_pkg7o")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ice Zone/IceFloor9"]
 mesh = SubResource("BoxMesh_gbfbk")
 surface_material_override/0 = SubResource("StandardMaterial3D_wse8f")
+
+[node name="IceFloor10" type="StaticBody3D" parent="Ice Zone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37, 5, 19.241644)
+physics_material_override = SubResource("PhysicsMaterial_gbfbk")
+script = ExtResource("6_j1qvj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ice Zone/IceFloor10"]
+shape = SubResource("BoxShape3D_pkg7o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ice Zone/IceFloor10"]
+mesh = SubResource("BoxMesh_j1qvj")
+surface_material_override/0 = SubResource("StandardMaterial3D_j1qvj")
 
 [node name="CP4" type="StaticBody3D" parent="Ice Zone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.2726, 50.0573, 58.8911)

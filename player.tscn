@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dta32dfhx2qqm"]
+[gd_scene load_steps=7 format=3 uid="uid://dta32dfhx2qqm"]
 
 [ext_resource type="Script" uid="uid://bk74gvl788jcr" path="res://player.gd" id="1_hqtel"]
 [ext_resource type="Script" uid="uid://b1s8dpeqo5ktp" path="res://camera.gd" id="2_sweqy"]
@@ -10,11 +10,9 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_hqtel"]
 radius = 1.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gbfbk"]
-bg_color = Color(0.169245, 0.169245, 0.169245, 1)
-
 [node name="Player" type="RigidBody3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+collision_layer = 128
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
@@ -41,15 +39,19 @@ grow_vertical = 2
 script = ExtResource("3_2hs0m")
 
 [node name="Label" type="Label" parent="Camera3D/Control"]
-layout_direction = 3
-layout_mode = 0
-offset_top = 318.0
-offset_right = 118.0
-offset_bottom = 406.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -59.0
+offset_right = 59.0
+offset_bottom = 88.0
+grow_horizontal = 2
 theme_override_colors/font_color = Color(0.207843, 0.956863, 0.647059, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_gbfbk")
-horizontal_alignment = 2
+horizontal_alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Camera3D/Control"]
 layout_mode = 0
@@ -59,34 +61,6 @@ offset_bottom = 45.0
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-fit_content = true
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Camera3D/Control"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 630.0
-offset_right = 416.0
-offset_bottom = 720.0
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "LMB - Charge Jump
-R - Quick restart
-"
-fit_content = true
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="Camera3D/Control"]
-layout_mode = 0
-offset_left = 865.0
-offset_top = 585.0
-offset_right = 1280.0
-offset_bottom = 720.0
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "[right]F - Fullscreen
-O - Decrease sensitivity
-P - Increase sensitivity"
 fit_content = true
 
 [node name="Celebrate" type="RichTextLabel" parent="Camera3D/Control"]
@@ -193,6 +167,52 @@ theme_override_constants/outline_size = 5
 text = "no item"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Controls" type="Control" parent="Camera3D/Control"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera3D/Control/Controls"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 416.0
+offset_bottom = 180.0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "WASD - Move
+Space - Jump
+LMB - Shoot (50 pts)
+RMB - Use item
+[color=YELLOW]F - Fullscreen
+O - Decrease sensitivity
+P - Increase sensitivity
+Z - Music vol. up
+X - Music vol. down
+[color=red]Q - Main menu
+R - Quick retry
+"
+fit_content = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Camera3D/Control"]
+layout_mode = 0
+offset_top = 630.0
+offset_right = 415.0
+offset_bottom = 810.0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "
+C - Show/hide controls
+"
+fit_content = true
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -10000)
+collision_mask = 17
+debug_shape_thickness = 1
 
 [node name="JumpPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_1jxqw")
