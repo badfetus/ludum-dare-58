@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmq7p6a15k2k6"]
+[gd_scene load_steps=9 format=3 uid="uid://bmq7p6a15k2k6"]
 
 [ext_resource type="PackedScene" uid="uid://cktynfl3gck4y" path="res://world_environment.tscn" id="1_dwbse"]
 [ext_resource type="Script" uid="uid://bkmlnbcalpm3p" path="res://world.gd" id="1_pkg7o"]
@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dta32dfhx2qqm" path="res://player.tscn" id="2_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://fg4h4v7677ls" path="res://zones.tscn" id="3_036b0"]
 [ext_resource type="PackedScene" uid="uid://cdw3lb6k3vmwj" path="res://directional_light_3d.tscn" id="5_pkg7o"]
-[ext_resource type="PackedScene" uid="uid://cylr6n5amvh3t" path="res://audio_stream_player.tscn" id="6_gbfbk"]
+[ext_resource type="PackedScene" uid="uid://cylr6n5amvh3t" path="res://sounds/audio_stream_player.tscn" id="6_gbfbk"]
+[ext_resource type="PackedScene" uid="uid://dmq5cpdrmiq7" path="res://pickups/Pickup.tscn" id="8_gbfbk"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_pkg7o")
@@ -16,6 +17,7 @@ script = ExtResource("1_pkg7o")
 [node name="BigFloor" parent="." instance=ExtResource("1_tlwt5")]
 
 [node name="Player" parent="." instance=ExtResource("2_aqk2v")]
+gravity_scale = 1.5
 
 [node name="Zones" parent="." instance=ExtResource("3_036b0")]
 
@@ -23,3 +25,6 @@ script = ExtResource("1_pkg7o")
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource("6_gbfbk")]
 volume_db = -10.0
+
+[node name="Pickup" parent="." instance=ExtResource("8_gbfbk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 27.088)

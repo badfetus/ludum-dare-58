@@ -2,8 +2,11 @@ extends Node3D
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Restart"): 
-		var scene = load("res://world.tscn")
-		get_tree().change_scene_to_packed(scene)
+		restart()
+
+func restart():
+	var scene = load("res://world.tscn")
+	get_tree().change_scene_to_packed(scene)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("FullScreen"):
